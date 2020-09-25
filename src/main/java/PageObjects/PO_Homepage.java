@@ -8,6 +8,6 @@ public class PO_Homepage
     public WebElement Practice;
     {
         By practicebutton = By.xpath("//[@contains(Text(),'Practice')]");
-        By. 
+       // By.
     }
 }
