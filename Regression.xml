@@ -4,6 +4,7 @@
     <test verbose="2" preserve-order="true" name="D:/Programming/RG_Automation/src/test/java">
         <classes>
             <class name="HomePage"/>
+			<!--Testing Git-->
         </classes>
     </test>
 </suite>
