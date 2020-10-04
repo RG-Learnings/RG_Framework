@@ -49,8 +49,8 @@ public class HomePagetest extends Helper_Class implements RelativePath
         if(home==null)
             home = new PO_Homepage(driver);
         home.getLogin().click();
-        Assert.assertTrue(driver.getCurrentUrl().equalsIgnoreCase("https://rahulshettyacademy.com/sign_in/"),
-                "Failed to navigated to Login page")    ;
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
+                "Failed to navigated to Login page");
     }
 
     @DataProvider

@@ -8,6 +8,10 @@ public class PO_LoginPage {
 
     public WebDriver driver;
 
+    By password = By.id("passwd");
+    By emailid = By.id("email");
+    By signinbutton = By.xpath("//button[@id='SubmitLogin']");
+
     public PO_LoginPage(WebDriver driver)
     {
         this.driver =driver;
@@ -15,12 +19,14 @@ public class PO_LoginPage {
 
     public WebElement getEmail()
     {
-        By emailid = By.id("user_email");
         return driver.findElement(emailid);
     }
     public WebElement getPassword()
     {
-            By password = By.id("user_password");
         return driver.findElement(password);
+    }
+    public WebElement getsignin()
+    {
+        return driver.findElement(signinbutton);
     }
 }

@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 public class PO_Homepage extends Helper_Class
 {
     public WebDriver driver;
+    By blockbestsellers = By.xpath("//a[contains(text(),'Best Sellers')]");
+    By loginbutton = By.cssSelector(".login");
 
     public PO_Homepage(WebDriver driver)
     {
@@ -16,12 +18,10 @@ public class PO_Homepage extends Helper_Class
 
     public WebElement getPractice()
     {
-        By practicebutton = By.xpath("//a[contains(text(),'Practice')]");
-       return driver.findElement(practicebutton);
+       return driver.findElement(blockbestsellers);
     }
     public WebElement getLogin()
     {
-        By loginbutton = By.xpath("//a[contains(text(),'Login')]");
         return driver.findElement(loginbutton);
     }
 }
