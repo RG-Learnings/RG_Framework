@@ -1,5 +1,6 @@
 package Package_Helper;//import org.openqa.selenium.WebDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,8 +21,9 @@ public class Helper_Class implements RelativePath
         String SelectedBrowser = prop.getProperty("browser");
         if(SelectedBrowser.equals("Firefox"))
         {
-            System.setProperty(RelativePath.Firefox_prop, RelativePath.Firefox_Driver_path);
-            mydriver = new FirefoxDriver();
+            //System.setProperty(RelativePath.Firefox_prop, RelativePath.Firefox_Driver_path);
+            WebDriverManager.firefoxdriver().setup();
+            mydriver= new FirefoxDriver();
         }
         else if(SelectedBrowser.equals("Edge"))
         {

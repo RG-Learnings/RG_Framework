@@ -36,6 +36,12 @@
             <version>7.3.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Webdriver Manager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.2</version>
+        </dependency>
 
 
     </dependencies>
