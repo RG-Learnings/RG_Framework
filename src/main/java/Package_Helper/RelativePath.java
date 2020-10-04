@@ -1,3 +1,5 @@
+package Package_Helper;
+
 public interface RelativePath
 {
     String Projectpath = System.getProperty("user.dir");

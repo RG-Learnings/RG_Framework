@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="D:/Programming/RG_Automation/src/test/java">
         <classes>
-            <class name="HomePage"/>
+            <class name="HomePagetest"/>
 			<!-- Annotated Tag Testing-->
         </classes>
     </test>

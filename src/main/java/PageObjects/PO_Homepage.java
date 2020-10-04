@@ -1,13 +1,21 @@
 package PageObjects;
 
+import Package_Helper.Helper_Class;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class PO_Homepage
+public class PO_Homepage extends Helper_Class
 {
-    public WebElement Practice;
+    public WebDriver driver;
+    public void PO_Homepage(WebDriver driver)
     {
-        By practicebutton = By.xpath("//[@contains(Text(),'Practice')]");
-       // By.
+        this.driver =driver;
+    }
+
+    public WebElement Practicebutton()
+    {
+        By practicebutton = By.xpath("//a[contains(text(),'Practice')]");
+       return driver.findElement(practicebutton);
     }
 }
