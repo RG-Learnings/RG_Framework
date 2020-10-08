@@ -28,19 +28,22 @@ public class HomePagetest extends Helper_Class implements RelativePath
         driver=Startbrowser();
     }
     @Test
-    public void Navigate() throws IOException {
-        prop.load(fis);
-        String webpageUrl = prop.getProperty("url");
+    public void Navigate() {
+        //prop.load(fis);
+        String webpageUrl = prop.getProperty("url")+"index.php";
         driver.get(webpageUrl);
         Assert.assertEquals(driver.getCurrentUrl(),webpageUrl);
     }
     @Test
-    public void practice()
+    public void bestselleritemsvalidation()
     {
         if(home==null)
         home = new PO_Homepage(driver);
-        Assert.assertTrue(home.getPractice().getText().equalsIgnoreCase("Practice"),
+        Assert.assertTrue(home.getbestsellers().getText().equalsIgnoreCase("Best Sellers"),
                 "Practice Button is not available in home page");
+
+        Assert.assertEquals(home.getbestselleritems().size(),7,
+                "best seller items are supposed to be 7" );
     }
 
     @Test
@@ -54,8 +57,8 @@ public class HomePagetest extends Helper_Class implements RelativePath
     }
 
     @DataProvider
-    public Object[][] getdata() throws IOException {
-        prop.load(fis);
+    public Object[][] getdata() {
+        //prop.load(fis);
 
         //Rows for different tests
         //columns for different data fields for each test

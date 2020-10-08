@@ -13,10 +13,12 @@ import java.util.concurrent.TimeUnit;
 public class Helper_Class implements RelativePath
 {
     public WebDriver mydriver;
+    public Properties prop;
+    public FileInputStream fis;
     public WebDriver Startbrowser() throws IOException {
 
-        Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream(RelativePath.Properties_File_path);
+        prop = new Properties();
+        fis = new FileInputStream(RelativePath.Properties_File_path);
         prop.load(fis);
         String SelectedBrowser = prop.getProperty("browser");
         if(SelectedBrowser.equals("Firefox"))
@@ -33,6 +35,7 @@ public class Helper_Class implements RelativePath
         else
             System.out.println("Please enter Valid Browser name");
         mydriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         return mydriver;
     }
 }
