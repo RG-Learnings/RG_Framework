@@ -1,4 +1,4 @@
-import Package_Helper.Helper_Class;
+import Base.MyBrowser;
 import PageObjects.PO_LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -9,16 +9,13 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class logintest extends Helper_Class
+public class logintest extends MyBrowser
 {
     public WebDriver driver;
     PO_LoginPage lp;
-/*    Properties prop = new Properties();
-    FileInputStream fis= new FileInputStream(Properties_File_path);*/
 
     @BeforeClass
     public void browser() throws IOException {
-        //prop.load(fis);
         if (driver == null)
             driver = Startbrowser();
         String webpageurl= prop.getProperty("url")+"index.php?controller=authentication&back=my-account";
@@ -31,19 +28,7 @@ public class logintest extends Helper_Class
         lp=new PO_LoginPage(driver);
         Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigate to login page");
-//        String currentemail= lp.getEmail().getAttribute("Value").toString();
-        if(!lp.getEmail().getAttribute("value").equalsIgnoreCase(""))
-        {
-            lp.getEmail().clear();
-        }
-        System.out.println("value of the email field is"+lp.getEmail().getText());
-        lp.getEmail().sendKeys(uname);
-        if(!lp.getPassword().getAttribute("value").equalsIgnoreCase(""))
-        {
-            lp.getPassword().clear();
-        }
-        lp.getPassword().sendKeys(pwd);
-        lp.getsignin().click();
+        lp.login(uname,pwd);
         Assert.assertTrue(driver.getTitle().equalsIgnoreCase("My account - My Store"),
                 "Failed to Login");
     }

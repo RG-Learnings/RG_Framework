@@ -1,4 +1,4 @@
-package Package_Helper;//import org.openqa.selenium.WebDriver;
+package Base;//import org.openqa.selenium.WebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class Helper_Class implements RelativePath
+public class MyBrowser implements RelativePath
 {
     public WebDriver mydriver;
     public Properties prop;

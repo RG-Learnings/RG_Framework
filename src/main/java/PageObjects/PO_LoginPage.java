@@ -1,32 +1,32 @@
 package PageObjects;
 
-import org.openqa.selenium.By;
+
+import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class PO_LoginPage {
-
-    public WebDriver driver;
-
-    By password = By.id("passwd");
-    By emailid = By.id("email");
-    By signinbutton = By.xpath("//button[@id='SubmitLogin']");
+public class PO_LoginPage extends BasePage {
 
     public PO_LoginPage(WebDriver driver)
     {
-        this.driver =driver;
+        super(driver);
     }
 
-    public WebElement getEmail()
+    @FindBy(id="email")
+    public WebElement txtemail;
+
+    @FindBy(id="passwd")
+    public WebElement txtpassword;
+
+    @FindBy(xpath = "//button[@id='SubmitLogin']")
+    public WebElement btnlogin;
+
+    public PO_Homepage login(String userName, String password)
     {
-        return driver.findElement(emailid);
-    }
-    public WebElement getPassword()
-    {
-        return driver.findElement(password);
-    }
-    public WebElement getsignin()
-    {
-        return driver.findElement(signinbutton);
+        txtemail.sendKeys(userName);
+        txtpassword.sendKeys(password);
+        btnlogin.click();
+        return new PO_Homepage(driver);
     }
 }

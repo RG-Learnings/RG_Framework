@@ -1,4 +1,4 @@
-import Package_Helper.Helper_Class;
+import Base.MyBrowser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-public class Game extends Helper_Class
+public class Game extends MyBrowser
 {
     public WebDriver driver;
 
@@ -30,19 +30,16 @@ public class Game extends Helper_Class
                     break;
                 }
             }
-
         }
         numbers.clear();
         numbers = driver.findElements(By.xpath("//div[@class='col']//div"));
-        int temp;
+        int temp=0;
         while (j<=50)
         {
             for(int i=0;i<25;i++)
             {
                 String s=numbers.get(i).getText();
-                if(s.equalsIgnoreCase(""))
-                    temp=0;
-                else
+                if(!s.equalsIgnoreCase(""))
                     temp =Integer.parseInt(s);
                 if(temp==j)
                 {
