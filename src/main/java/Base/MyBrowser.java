@@ -35,7 +35,8 @@ public class MyBrowser implements RelativePath
         else
             System.out.println("Please enter Valid Browser name");
         mydriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+        mydriver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+        mydriver.manage().window().maximize();
         return mydriver;
     }
 }

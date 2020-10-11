@@ -10,10 +10,18 @@ import java.util.List;
 
 public class PO_Homepage extends BasePage
 {
+    public static  PO_Homepage obj;
 
-    public PO_Homepage(WebDriver driver)
+    private PO_Homepage(WebDriver driver)
     {
         super(driver);
+    }
+    public static PO_Homepage getInstance(WebDriver driver)
+    {
+
+        if(obj==null)
+            obj = new PO_Homepage(driver);
+        return obj;
     }
 
     @FindBy(xpath = "//a[contains(text(),'Best Sellers')]")
@@ -28,6 +36,6 @@ public class PO_Homepage extends BasePage
     public PO_LoginPage clicklogin()
     {
         btnLogin.click();
-        return new PO_LoginPage(driver);
+        return PO_LoginPage.getInstance(driver);
     }
 }

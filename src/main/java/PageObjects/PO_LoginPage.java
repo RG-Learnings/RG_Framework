@@ -7,10 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PO_LoginPage extends BasePage {
-
-    public PO_LoginPage(WebDriver driver)
+    public static PO_LoginPage obj;
+    private PO_LoginPage(WebDriver driver)
     {
         super(driver);
+    }
+
+    public static PO_LoginPage getInstance(WebDriver driver)
+    {
+
+        if(obj==null)
+            obj = new PO_LoginPage(driver);
+        return obj;
     }
 
     @FindBy(id="email")
@@ -27,6 +35,6 @@ public class PO_LoginPage extends BasePage {
         txtemail.sendKeys(userName);
         txtpassword.sendKeys(password);
         btnlogin.click();
-        return new PO_Homepage(driver);
+        return PO_Homepage.getInstance(driver);
     }
 }

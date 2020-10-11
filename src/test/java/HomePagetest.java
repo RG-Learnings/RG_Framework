@@ -16,7 +16,7 @@ import java.util.Properties;
 public class HomePagetest extends MyBrowser implements RelativePath
 {
     PO_Homepage home;
-    WebDriver driver;
+    //WebDriver driver;
     Properties prop = new Properties();
     FileInputStream fis= new FileInputStream(Properties_File_path);
 
@@ -25,20 +25,19 @@ public class HomePagetest extends MyBrowser implements RelativePath
 
     @BeforeClass
     public void browser() throws IOException {
-        driver=Startbrowser();
+        mydriver=Startbrowser();
     }
     @Test
     public void Navigate() {
         //prop.load(fis);
         String webpageUrl = prop.getProperty("url")+"index.php";
-        driver.get(webpageUrl);
-        Assert.assertEquals(driver.getCurrentUrl(),webpageUrl);
+        mydriver.get(webpageUrl);
+        Assert.assertEquals(mydriver.getCurrentUrl(),webpageUrl);
     }
     @Test
     public void bestselleritemsvalidation()
     {
-        if(home==null)
-        home = new PO_Homepage(driver);
+        home = PO_Homepage.getInstance(mydriver);
         Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
                 "Practice Button is not available in home page");
 
@@ -49,10 +48,9 @@ public class HomePagetest extends MyBrowser implements RelativePath
     @Test
     public void login()
     {
-        if(home==null)
-            home = new PO_Homepage(driver);
+        home = PO_Homepage.getInstance(mydriver);
         PO_LoginPage lp = home.clicklogin();
-        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
+        Assert.assertTrue(mydriver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigated to Login page");
     }
 
@@ -60,8 +58,7 @@ public class HomePagetest extends MyBrowser implements RelativePath
     @AfterClass
     public void closebrowser()
     {
-            driver.close();
-            driver = null;
-            home = null;
+            mydriver.close();
+            mydriver = null;
     }
 }
