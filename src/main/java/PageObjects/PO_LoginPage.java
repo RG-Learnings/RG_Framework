@@ -15,9 +15,11 @@ public class PO_LoginPage extends BasePage {
 
     public static PO_LoginPage getInstance(WebDriver driver)
     {
-
-        if(obj==null)
-            obj = new PO_LoginPage(driver);
+        synchronized (PO_Homepage.class)
+        {
+            if(obj==null)
+                obj = new PO_LoginPage(driver);
+        }
         return obj;
     }
 

@@ -20,7 +20,14 @@ public class PO_Homepage extends BasePage
     {
 
         if(obj==null)
-            obj = new PO_Homepage(driver);
+        {
+            synchronized (PO_Homepage.class)
+            {
+                if(obj==null)
+                    obj = new PO_Homepage(driver);
+            }
+
+        }
         return obj;
     }
 
