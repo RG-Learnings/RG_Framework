@@ -40,6 +40,9 @@ public class PO_Homepage extends BasePage
     @FindBy(xpath = "//ul[@id='blockbestsellers']/li")
     public List<WebElement> getbestselleritems;
 
+    @FindBy(xpath = "//span[@class='navigation_page']")
+    public WebElement btnMyaccount;
+
     public PO_LoginPage clicklogin()
     {
         btnLogin.click();

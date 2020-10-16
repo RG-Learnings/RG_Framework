@@ -5,21 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class MyBrowser implements RelativePath
+public class MyBrowser extends Base implements RelativePath
 {
     public WebDriver mydriver;
-    public Properties prop;
-    public FileInputStream fis;
-    public WebDriver Startbrowser() throws IOException {
 
-        prop = new Properties();
-        fis = new FileInputStream(RelativePath.Properties_File_path);
-        prop.load(fis);
+    public WebDriver Startbrowser() throws IOException
+    {
+        myproperty();
         String SelectedBrowser = prop.getProperty("browser");
         if(SelectedBrowser.equals("Firefox"))
         {
@@ -38,5 +34,10 @@ public class MyBrowser implements RelativePath
         mydriver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         mydriver.manage().window().maximize();
         return mydriver;
+    }
+    public void Teardown()
+    {
+        mydriver.quit();
+        mydriver=null;
     }
 }
