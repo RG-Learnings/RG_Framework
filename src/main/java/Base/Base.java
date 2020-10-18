@@ -6,11 +6,12 @@ import java.util.Properties;
 
 public class Base
 {
-    public static Properties prop;
+    //public static Properties prop;
     public FileInputStream fis;
-    public void myproperty() throws IOException {
-        prop = new Properties();
+    public Properties myproperty() throws IOException {
+        Properties prop = new Properties();
         fis = new FileInputStream(RelativePath.Properties_File_path);
         prop.load(fis);
+        return prop;
     }
 }

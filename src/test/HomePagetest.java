@@ -1,19 +1,29 @@
 import Base.MyBrowser;
 import Base.RelativePath;
 import PageObjects.PO_Homepage;
+import Utilities.LogUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class HomePagetest extends MyBrowser implements RelativePath
 {
     PO_Homepage home;
+    public Properties prop;
+    public static Logger log;
 
     @BeforeSuite
     public void browser() throws IOException {
+        //log = LogManager.getLogger(HomePagetest.class.getName());
+        log = LogUtil.getloggervariable(HomePagetest.class);
         mydriver=Startbrowser();
-        myproperty();
+        log.info("Browser initialized");
+        prop = myproperty();
+        log.info("Property file loaded");
     }
     @Test
     public void Navigate() {
@@ -36,15 +46,15 @@ public class HomePagetest extends MyBrowser implements RelativePath
     public void login()
     {
         home = PO_Homepage.getInstance(mydriver);
-        //PO_LoginPage lp = home.clicklogin();
+        home.clicklogin();
         Assert.assertTrue(mydriver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigated to Login page");
     }
-
-
-    @AfterTest
+    @AfterClass
     public void closebrowser()
     {
-            Teardown();
+        mydriver.quit();
+        mydriver = null;
     }
 }
+

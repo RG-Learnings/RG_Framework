@@ -1,20 +1,22 @@
 import Base.MyBrowser;
 import PageObjects.PO_Homepage;
 import PageObjects.PO_LoginPage;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class logintest extends MyBrowser
 {
       PO_LoginPage lp;
+      public Properties prop;
 
     @BeforeClass
     public void browser() throws IOException {
         if (mydriver == null)
             mydriver = Startbrowser();
+        prop = myproperty();
         String webpageurl= prop.getProperty("url")+"index.php?controller=authentication&back=my-account";
         mydriver.get(webpageurl);
     }
@@ -45,12 +47,12 @@ public class logintest extends MyBrowser
         o[1][1]=prop.getProperty("mypass");
         return o;
     }
+
     @AfterSuite
     public void closebrowser()
     {
         mydriver.quit();
         mydriver = null;
-        lp = null;
     }
 
 }

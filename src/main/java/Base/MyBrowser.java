@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class MyBrowser extends Base implements RelativePath
@@ -15,7 +16,7 @@ public class MyBrowser extends Base implements RelativePath
 
     public WebDriver Startbrowser() throws IOException
     {
-        myproperty();
+        Properties prop = myproperty();
         String SelectedBrowser = prop.getProperty("browser");
         if(SelectedBrowser.equals("Firefox"))
         {
