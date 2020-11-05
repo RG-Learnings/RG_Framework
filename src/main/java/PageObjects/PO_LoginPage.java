@@ -8,19 +8,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class PO_LoginPage extends BasePage {
     public static PO_LoginPage obj;
-    private PO_LoginPage(WebDriver driver)
+    public PO_LoginPage(WebDriver driver)
     {
         super(driver);
-    }
-
-    public static PO_LoginPage getInstance(WebDriver driver)
-    {
-        synchronized (PO_Homepage.class)
-        {
-            if(obj==null)
-                obj = new PO_LoginPage(driver);
-        }
-        return obj;
     }
 
     @FindBy(id="email")
@@ -37,6 +27,6 @@ public class PO_LoginPage extends BasePage {
         txtemail.sendKeys(userName);
         txtpassword.sendKeys(password);
         btnlogin.click();
-        return PO_Homepage.getInstance(driver);
+        return BasePage.Getinstance(PO_Homepage.class,driver);
     }
 }

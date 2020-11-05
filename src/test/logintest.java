@@ -1,7 +1,10 @@
+import Base.BasePage;
 import Base.MyBrowser;
 import PageObjects.PO_Homepage;
 import PageObjects.PO_LoginPage;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.io.IOException;
@@ -10,28 +13,29 @@ import java.util.Properties;
 public class logintest extends MyBrowser
 {
       PO_LoginPage lp;
+      public WebDriver driver;
       public Properties prop;
 
     @BeforeClass
-    public void browser() throws IOException {
-        if (mydriver == null)
-            mydriver = Startbrowser();
+    public void initializer(ITestContext context) throws IOException {
+        driver = Startbrowser();
+        context.setAttribute("webDriver", driver);
         prop = myproperty();
         String webpageurl= prop.getProperty("url")+"index.php?controller=authentication&back=my-account";
-        mydriver.get(webpageurl);
+        driver.get(webpageurl);
     }
 
     @Test(dataProvider = "getdata")
     public void Login(String uname,String pwd)
     {
-        lp=PO_LoginPage.getInstance(mydriver);
-        Assert.assertTrue(mydriver.getTitle().equalsIgnoreCase("Login - My Store"),
+        lp= BasePage.Getinstance(PO_LoginPage.class,driver);
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigate to login page");
         lp.txtemail.clear();
         lp.txtpassword.clear();
         lp.login(uname,pwd);
-        PO_Homepage home = PO_Homepage.getInstance(mydriver);
-        Assert.assertTrue(home.btnMyaccount.getText().equalsIgnoreCase("My account"),
+        PO_Homepage home = BasePage.Getinstance(PO_Homepage.class,driver);
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("My account - My Store"),
                 "Failed to Login");
     }
     @DataProvider
@@ -48,11 +52,11 @@ public class logintest extends MyBrowser
         return o;
     }
 
-    @AfterSuite
+    @AfterClass
     public void closebrowser()
     {
-        mydriver.quit();
-        mydriver = null;
+        driver.close();
+        driver = null;
     }
 
 }

@@ -1,9 +1,10 @@
+import Base.BasePage;
 import Base.MyBrowser;
 import Base.RelativePath;
 import PageObjects.PO_Homepage;
 import Utilities.LogUtil;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -13,14 +14,15 @@ import java.util.Properties;
 public class HomePagetest extends MyBrowser implements RelativePath
 {
     PO_Homepage home;
+    public WebDriver driver;
     public Properties prop;
     public static Logger log;
 
-    @BeforeSuite
+    @BeforeClass
     public void browser() throws IOException {
         //log = LogManager.getLogger(HomePagetest.class.getName());
         log = LogUtil.getloggervariable(HomePagetest.class);
-        mydriver=Startbrowser();
+        driver=Startbrowser();
         log.info("Browser initialized");
         prop = myproperty();
         log.info("Property file loaded");
@@ -28,13 +30,14 @@ public class HomePagetest extends MyBrowser implements RelativePath
     @Test
     public void Navigate() {
         String webpageUrl = prop.getProperty("url")+"index.php";
-        mydriver.get(webpageUrl);
-        Assert.assertEquals(mydriver.getCurrentUrl(),webpageUrl);
+        driver.get(webpageUrl);
+        Assert.assertEquals(driver.getCurrentUrl(),webpageUrl);
     }
     @Test
     public void bestselleritemsvalidation()
     {
-        home = PO_Homepage.getInstance(mydriver);
+        //home = PO_Homepage.getInstance(driver);
+        home = BasePage.Getinstance(PO_Homepage.class,driver);
         Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
                 "Practice Button is not available in home page");
 
@@ -45,16 +48,16 @@ public class HomePagetest extends MyBrowser implements RelativePath
     @Test
     public void login()
     {
-        home = PO_Homepage.getInstance(mydriver);
+        home = BasePage.Getinstance(PO_Homepage.class,driver);
         home.clicklogin();
-        Assert.assertTrue(mydriver.getTitle().equalsIgnoreCase("Login - My Store"),
+        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigated to Login page");
     }
     @AfterClass
     public void closebrowser()
     {
-        mydriver.quit();
-        mydriver = null;
+        driver.close();
+        driver = null;
     }
 }
 

@@ -12,23 +12,9 @@ public class PO_Homepage extends BasePage
 {
     public static  PO_Homepage obj;
 
-    private PO_Homepage(WebDriver driver)
+    public PO_Homepage(WebDriver driver)
     {
         super(driver);
-    }
-    public static PO_Homepage getInstance(WebDriver driver)
-    {
-
-        if(obj==null)
-        {
-            synchronized (PO_Homepage.class)
-            {
-                if(obj==null)
-                    obj = new PO_Homepage(driver);
-            }
-
-        }
-        return obj;
     }
 
     @FindBy(xpath = "//a[contains(text(),'Best Sellers')]")
@@ -46,6 +32,6 @@ public class PO_Homepage extends BasePage
     public PO_LoginPage clicklogin()
     {
         btnLogin.click();
-        return PO_LoginPage.getInstance(driver);
+        return BasePage.Getinstance(PO_LoginPage.class,driver);
     }
 }

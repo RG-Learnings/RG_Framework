@@ -3,14 +3,6 @@ package Utilities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.annotation.Target;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class LogUtil
 {
     /*ZonedDateTime dateTime =ZonedDateTime.now();
@@ -35,6 +27,6 @@ public class LogUtil
     {
         Logger log = LogManager.getLogger(myclass);
         System.out.println("logs:" + log.toString());
-                return log;
+        return log;
     }
 }
