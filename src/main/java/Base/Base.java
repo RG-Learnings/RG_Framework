@@ -21,11 +21,11 @@ public class Base extends MyBrowser implements ITestListener,RelativePath
 
 {
 
-public static final Logger log = LogUtil.getloggervariable(Base.class);
+    public static final Logger log = LogUtil.getloggervariable(Base.class);
     @Override
     public void onTestFailure( ITestResult result)
     {
-       String failedtest = result.getMethod().getMethodName()+getdatetime();
+        String failedtest = result.getMethod().getMethodName()+getdatetime();
 //        ITestContext context = result.getTestContext();
 //        WebDriver driver = (WebDriver) context.getAttribute("webDriver");
 
@@ -41,10 +41,10 @@ public static final Logger log = LogUtil.getloggervariable(Base.class);
     public void getScreenshot(WebDriver driver,String failedtest) throws IOException {
 
 
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            File source= ts.getScreenshotAs(OutputType.FILE);
-            String destination = Screenshotpath+failedtest+".png";
-            FileUtils.copyFile(source,new File(destination));
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source= ts.getScreenshotAs(OutputType.FILE);
+        String destination = Screenshotpath+failedtest+".png";
+        FileUtils.copyFile(source,new File(destination));
     }
 
     public WebElement waitforelement(WebDriver driver, WebElement element)

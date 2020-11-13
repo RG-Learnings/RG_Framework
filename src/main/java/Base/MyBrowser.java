@@ -20,21 +20,21 @@ public class MyBrowser implements RelativePath
     {
        /* if(mydriver==null)
         {*/
-            Properties prop = myproperty();
-            String SelectedBrowser = prop.getProperty("browser");
-            if(SelectedBrowser.equals("Firefox"))
-            {
-                //System.setProperty(RelativePath.Firefox_prop, RelativePath.Firefox_Driver_path);
-                WebDriverManager.firefoxdriver().setup();
-                mydriver= new FirefoxDriver();
-            }
-            else if(SelectedBrowser.equals("Edge"))
-            {
-                System.setProperty(RelativePath.Edge_prop, RelativePath.Edge_Driver_path);
-                mydriver = new EdgeDriver();
-            }
-            else
-                System.out.println("Please enter Valid Browser name");
+        Properties prop = myproperty();
+        String SelectedBrowser = prop.getProperty("browser");
+        if(SelectedBrowser.equals("Firefox"))
+        {
+            //System.setProperty(RelativePath.Firefox_prop, RelativePath.Firefox_Driver_path);
+            WebDriverManager.firefoxdriver().setup();
+            mydriver= new FirefoxDriver();
+        }
+        else if(SelectedBrowser.equals("Edge"))
+        {
+            System.setProperty(RelativePath.Edge_prop, RelativePath.Edge_Driver_path);
+            mydriver = new EdgeDriver();
+        }
+        else
+            System.out.println("Please enter Valid Browser name");
 //        }
         mydriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mydriver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);

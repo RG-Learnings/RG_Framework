@@ -12,9 +12,9 @@ import java.util.Properties;
 
 public class logintest extends MyBrowser
 {
-      PO_LoginPage lp;
-      public WebDriver driver;
-      public Properties prop;
+    PO_LoginPage lp;
+    public WebDriver driver;
+    public Properties prop;
 
     @BeforeClass
     public void initializer(ITestContext context) throws IOException {
@@ -40,7 +40,7 @@ public class logintest extends MyBrowser
     }
     @DataProvider
     public Object[][] getdata()  {
-       // prop.load(fis);
+        // prop.load(fis);
 
         //Rows for different tests
         //columns for different data fields for each test
