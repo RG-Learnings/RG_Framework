@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="Regression Test Suite">
     <listeners>
         <listener class-name="Base.Base"/>
     </listeners>
@@ -8,6 +8,7 @@
         <classes>
             <class name="HomePagetest"/>
             <class name="logintest" />
+<!--            <class name="Game" />-->
         </classes>
     </test>
 </suite>

@@ -29,13 +29,14 @@ public class HomePagetest extends MyBrowser implements RelativePath
     }
     @Test
     public void Navigate() {
-        String webpageUrl = prop.getProperty("url")+"index.php";
-        driver.get(webpageUrl);
-        Assert.assertEquals(driver.getCurrentUrl(),webpageUrl);
+//        String webpageUrl = prop.getProperty("url")+"index.php";
+        driver.get(prop.getProperty("url"));
+        Assert.assertEquals(driver.getTitle(),"My Store", "Navigated to Home age successfully");
     }
     @Test
     public void bestselleritemsvalidation()
     {
+
         //home = PO_Homepage.getInstance(driver);
         home = BasePage.Getinstance(PO_Homepage.class,driver);
         Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),

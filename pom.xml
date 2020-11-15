@@ -25,7 +25,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                 <configuration>
-                    <suiteXmlFiles>Regression.xml</suiteXmlFiles>
+                    <suiteXmlFiles>D:\Programming\RG_Framework\src\Resource\Regression.xml</suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
@@ -71,18 +71,7 @@
             <artifactId>log4j-core</artifactId>
             <version>2.13.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.3.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
+
         <!-- JXL API --><!--
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
@@ -93,6 +82,7 @@
     </dependencies>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
     </properties>
