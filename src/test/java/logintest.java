@@ -4,7 +4,6 @@ import Base.FileReader;
 import PageObjects.PO_LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -13,10 +12,10 @@ import org.testng.annotations.Test;
 import java.util.Properties;
 
 public class logintest extends FileReader {
-    PO_LoginPage lp;
     public WebDriver driver;
     public Properties prop;
     public Browserfactory browserfactory;
+    PO_LoginPage lp;
 
     @BeforeClass
     public void setup() {
@@ -54,8 +53,7 @@ public class logintest extends FileReader {
     }
 
     @AfterClass
-    public void end()
-    {
+    public void end() {
         browserfactory.teardownBrowser();
     }
 

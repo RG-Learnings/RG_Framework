@@ -1,4 +1,7 @@
 *.log
 *.orig
 /Screenshots/
+/Reports
+/Target/
+/Logs/
 /Reports/Screenshots/

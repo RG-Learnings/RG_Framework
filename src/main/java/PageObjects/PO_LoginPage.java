@@ -28,4 +28,10 @@ public class PO_LoginPage extends BasePage {
         txtpassword.sendKeys(password);
         btnlogin.click();
     }
+
+    public String getPageTitle()
+    {
+        return driver.getTitle();
+    }
+
 }

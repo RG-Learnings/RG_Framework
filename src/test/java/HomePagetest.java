@@ -3,6 +3,7 @@ import Base.Browserfactory;
 import Base.FileReader;
 import Base.RelativePath;
 import PageObjects.PO_Homepage;
+import PageObjects.PO_LoginPage;
 import Utilities.LogUtil;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,8 @@ import java.util.Properties;
 
 public class HomePagetest extends FileReader implements RelativePath
 {
-    PO_Homepage home;
+    PO_Homepage page_Home;
+    PO_LoginPage page_Login;
     public WebDriver driver;
     public Properties prop;
     public static Logger log;
@@ -39,21 +41,20 @@ public class HomePagetest extends FileReader implements RelativePath
     @Test
     public void bestselleritemsvalidation()
     {
-        //home = PO_Homepage.getInstance(driver);
-        home = BasePage.Getinstance(PO_Homepage.class,driver);
-        Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
+        page_Home = BasePage.Getinstance(PO_Homepage.class,driver);
+        Assert.assertTrue(page_Home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
                 "Practice Button is not available in home page");
 
-        Assert.assertEquals(home.getbestselleritems.size(),7,
+        Assert.assertEquals(page_Home.getbestselleritems.size(),7,
                 "best seller items are supposed to be 7" );
     }
 
     @Test
-    public void login()
+    public void navigateToLogin()
     {
-        home = BasePage.Getinstance(PO_Homepage.class,driver);
-        home.clicklogin();
-        Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
+        page_Home = BasePage.Getinstance(PO_Homepage.class,driver);
+        page_Login = page_Home.clicklogin();
+        Assert.assertTrue(page_Login.getPageTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigated to Login page");
     }
     @AfterClass
