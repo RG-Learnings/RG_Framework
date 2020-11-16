@@ -1,34 +1,37 @@
 package PageObjects;
 
-import Package_Helper.Helper_Class;
-import org.openqa.selenium.By;
+
+import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class PO_Homepage extends Helper_Class
+public class PO_Homepage extends BasePage
 {
-    public WebDriver driver;
-    By bestsellersbutton = By.xpath("//a[contains(text(),'Best Sellers')]");
-    By loginbutton = By.cssSelector(".login");
-    By bestselleritems = By.xpath("//ul[@id='blockbestsellers']/li");
+    public static  PO_Homepage obj;
 
     public PO_Homepage(WebDriver driver)
     {
-        this.driver =driver;
+        super(driver);
     }
 
-    public WebElement getbestsellers()
+    @FindBy(xpath = "//a[contains(text(),'Best Sellers')]")
+    public WebElement linkbestsellers;
+
+    @FindBy(css = ".login")
+    public WebElement btnLogin;
+
+    @FindBy(xpath = "//ul[@id='blockbestsellers']/li")
+    public List<WebElement> getbestselleritems;
+
+    @FindBy(xpath = "//span[@class='navigation_page']")
+    public WebElement btnMyaccount;
+
+    public PO_LoginPage clicklogin()
     {
-       return driver.findElement(bestsellersbutton);
-    }
-    public WebElement getLogin()
-    {
-        return driver.findElement(loginbutton);
-    }
-    public List<WebElement> getbestselleritems()
-    {
-        return driver.findElements(bestselleritems);
+        btnLogin.click();
+        return BasePage.Getinstance(PO_LoginPage.class,driver);
     }
 }

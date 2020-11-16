@@ -1,79 +1,65 @@
-import Package_Helper.Helper_Class;
-import Package_Helper.RelativePath;
+import Base.BasePage;
+import Base.Browserfactory;
+import Base.FileReader;
+import Base.RelativePath;
 import PageObjects.PO_Homepage;
+import Utilities.LogUtil;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
-public class HomePagetest extends Helper_Class implements RelativePath
+public class HomePagetest extends FileReader implements RelativePath
 {
     PO_Homepage home;
-    WebDriver driver;
-    Properties prop = new Properties();
-    FileInputStream fis= new FileInputStream(Properties_File_path);
-
-    public HomePagetest() throws FileNotFoundException {
-    }
+    public WebDriver driver;
+    public Properties prop;
+    public static Logger log;
+    public Browserfactory browserfactory;
 
     @BeforeClass
-    public void browser() throws IOException {
-        driver=Startbrowser();
+    public void browser()
+    {
+        //log = LogManager.getLogger(HomePagetest.class.getName());
+        log = LogUtil.getloggervariable(HomePagetest.class);
+        browserfactory = Browserfactory.getInstance();
+        driver = browserfactory.instanciateBrowser();
+        log.info("Browser initialized");
+        prop = readPropertyFile();
+        log.info("Property file loaded");
     }
     @Test
     public void Navigate() {
-        //prop.load(fis);
-        String webpageUrl = prop.getProperty("url")+"index.php";
-        driver.get(webpageUrl);
-        Assert.assertEquals(driver.getCurrentUrl(),webpageUrl);
+//        String webpageUrl = prop.getProperty("url")+"index.php";
+        driver.get(prop.getProperty("url"));
+        Assert.assertEquals(driver.getTitle(),"My Store", "Navigated to Home age successfully");
     }
     @Test
     public void bestselleritemsvalidation()
     {
-        if(home==null)
-        home = new PO_Homepage(driver);
-        Assert.assertTrue(home.getbestsellers().getText().equalsIgnoreCase("Best Sellers"),
+        //home = PO_Homepage.getInstance(driver);
+        home = BasePage.Getinstance(PO_Homepage.class,driver);
+        Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
                 "Practice Button is not available in home page");
 
-        Assert.assertEquals(home.getbestselleritems().size(),7,
+        Assert.assertEquals(home.getbestselleritems.size(),7,
                 "best seller items are supposed to be 7" );
     }
 
     @Test
     public void login()
     {
-        if(home==null)
-            home = new PO_Homepage(driver);
-        home.getLogin().click();
+        home = BasePage.Getinstance(PO_Homepage.class,driver);
+        home.clicklogin();
         Assert.assertTrue(driver.getTitle().equalsIgnoreCase("Login - My Store"),
                 "Failed to navigated to Login page");
     }
-
-    @DataProvider
-    public Object[][] getdata() {
-        //prop.load(fis);
-
-        //Rows for different tests
-        //columns for different data fields for each test
-        Object[][] o = new Object[2][2];
-        o[0][0]="admin";
-        o[0][1]="admin";
-        o[1][0]=prop.getProperty("Username");
-        o[1][1]=prop.getProperty("mypass");
-        return o;
-    }
     @AfterClass
-    public void closebrowser()
+    public void end()
     {
-            driver.close();
-            driver = null;
-            home = null;
+        browserfactory.teardownBrowser();
     }
 }
+
