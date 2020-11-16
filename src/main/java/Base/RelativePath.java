@@ -8,7 +8,7 @@ public interface RelativePath
     String Edge_prop="webdriver.edge.driver";
     String Firefox_Driver_path = Projectpath + "\\Webdriver\\geckodriver.exe";
     String Edge_Driver_path = Projectpath + "\\Webdriver\\msedgedriver.exe";
-    String Screenshotpath =  Projectpath + "\\Screenshots\\";
+    String ScreenshotPath =  Projectpath + "\\Reports\\Screenshots\\";
     String Report_path = Projectpath+"\\Reports\\TestReport.html";
 
 }

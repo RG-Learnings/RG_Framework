@@ -1,3 +1,4 @@
 *.log
 *.orig
 /Screenshots/
+/Reports/Screenshots/

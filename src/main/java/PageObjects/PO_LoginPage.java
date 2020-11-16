@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class PO_LoginPage extends BasePage {
-    public static PO_LoginPage obj;
+
     public PO_LoginPage(WebDriver driver)
     {
         super(driver);
@@ -22,11 +22,10 @@ public class PO_LoginPage extends BasePage {
     @FindBy(xpath = "//button[@id='SubmitLogin']")
     public WebElement btnlogin;
 
-    public PO_Homepage login(String userName, String password)
+    public void login(String userName, String password)
     {
         txtemail.sendKeys(userName);
         txtpassword.sendKeys(password);
         btnlogin.click();
-        return BasePage.Getinstance(PO_Homepage.class,driver);
     }
 }

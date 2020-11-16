@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Base extends MyBrowser implements ITestListener,RelativePath
+public class Base extends FileReader implements ITestListener,RelativePath
 
 {
     public Base() {
@@ -32,7 +32,7 @@ public class Base extends MyBrowser implements ITestListener,RelativePath
     public static final Logger log = LogUtil.getloggervariable(Base.class);
     ExtentReports reports;
     ExtentTest myTest;
-    ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<ExtentTest>();
+    ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
 
     @Override
     public void onTestStart(ITestResult result)
@@ -57,24 +57,24 @@ public class Base extends MyBrowser implements ITestListener,RelativePath
     public void onTestFailure( ITestResult result)
     {
         extentTestThreadLocal.get().fail(result.getThrowable());
-        String failedtest = result.getMethod().getMethodName()+getdatetime();
-//        ITestContext context = result.getTestContext();
-//        WebDriver driver = (WebDriver) context.getAttribute("webDriver");
-
-        try {
+        String failedTest = result.getMethod().getMethodName()+getdatetime();
+        try
+        {
             WebDriver driver= (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
-            extentTestThreadLocal.get().addScreenCaptureFromPath(getScreenshot(driver,failedtest),failedtest);
-            log.debug("Testcase " +failedtest+ " has failed and screenshot is taken for referrence");
+            extentTestThreadLocal.get().addScreenCaptureFromPath(getScreenshot(driver,failedTest),failedTest);
+            log.debug("Testcase " +failedTest+ " has failed and screenshot is taken for referrence");
 
-        } catch (Exception e) {
-            log.warn("Unable to take Screenshot for at " + failedtest);
+        }
+        catch (Exception e)
+        {
+            log.warn("Unable to take Screenshot for at " + failedTest);
         }
     }
     public String getScreenshot(WebDriver driver, String failedtest) throws IOException
     {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source= ts.getScreenshotAs(OutputType.FILE);
-        String destination = Screenshotpath+failedtest+".png";
+        String destination = ScreenshotPath +failedtest+".png";
         FileUtils.copyFile(source,new File(destination));
         return destination;
     }

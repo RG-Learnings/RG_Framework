@@ -1,5 +1,6 @@
 import Base.BasePage;
-import Base.MyBrowser;
+import Base.Browserfactory;
+import Base.FileReader;
 import Base.RelativePath;
 import PageObjects.PO_Homepage;
 import Utilities.LogUtil;
@@ -8,23 +9,25 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.io.IOException;
 import java.util.Properties;
 
-public class HomePagetest extends MyBrowser implements RelativePath
+public class HomePagetest extends FileReader implements RelativePath
 {
     PO_Homepage home;
     public WebDriver driver;
     public Properties prop;
     public static Logger log;
+    public Browserfactory browserfactory;
 
     @BeforeClass
-    public void browser() throws IOException {
+    public void browser()
+    {
         //log = LogManager.getLogger(HomePagetest.class.getName());
         log = LogUtil.getloggervariable(HomePagetest.class);
-        driver=Startbrowser();
+        browserfactory = Browserfactory.getInstance();
+        driver = browserfactory.instanciateBrowser();
         log.info("Browser initialized");
-        prop = myproperty();
+        prop = readPropertyFile();
         log.info("Property file loaded");
     }
     @Test
@@ -36,7 +39,6 @@ public class HomePagetest extends MyBrowser implements RelativePath
     @Test
     public void bestselleritemsvalidation()
     {
-
         //home = PO_Homepage.getInstance(driver);
         home = BasePage.Getinstance(PO_Homepage.class,driver);
         Assert.assertTrue(home.linkbestsellers.getText().equalsIgnoreCase("Best Sellers"),
@@ -55,10 +57,9 @@ public class HomePagetest extends MyBrowser implements RelativePath
                 "Failed to navigated to Login page");
     }
     @AfterClass
-    public void closebrowser()
+    public void end()
     {
-        driver.close();
-        driver = null;
+        browserfactory.teardownBrowser();
     }
 }
 
