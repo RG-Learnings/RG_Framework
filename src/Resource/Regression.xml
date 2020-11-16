@@ -8,7 +8,7 @@
         <classes>
             <class name="HomePagetest"/>
             <class name="logintest" />
-<!--            <class name="Game" />-->
+            <class name="Game" />
         </classes>
     </test>
 </suite>

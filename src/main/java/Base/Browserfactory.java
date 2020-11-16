@@ -29,7 +29,8 @@ public class Browserfactory {
     }
     private void setDriver()
     {
-        String SelectedBrowser = prop.getProperty("browser");
+        String SelectedBrowser = System.getProperty("browser");
+        //String SelectedBrowser = prop.getProperty("browser");
         if(SelectedBrowser.equals("Firefox"))
         {
             System.setProperty(RelativePath.Firefox_prop, RelativePath.Firefox_Driver_path);

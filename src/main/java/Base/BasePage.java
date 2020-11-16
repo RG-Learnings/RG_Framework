@@ -11,7 +11,7 @@ import java.util.Map;
 public class BasePage
 {
     public static final Logger log = LogUtil.getloggervariable(BasePage.class);
-    private static final Map<Class,Object> POMinstances = new HashMap<Class, Object>();
+    private static final Map<Class,Object> POMinstances = new HashMap<>();
     public WebDriver driver;
     public BasePage(WebDriver driver)
     {
